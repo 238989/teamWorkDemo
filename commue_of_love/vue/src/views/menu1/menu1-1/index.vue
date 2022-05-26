@@ -70,45 +70,45 @@
       <el-form ref="form" :model="form">
         <el-row>
           <el-col :span="2" class="line">ID</el-col>
-          <el-col :span="2"><el-input v-model="form.id" /></el-col>
+          <el-col :span="2"><el-input v-model="form.id" disabled="true" /></el-col>
           <el-col :span="3" class="line">发布账号</el-col>
-          <el-col :span="4"><el-input v-model="form.uid" /></el-col>
+          <el-col :span="4"><el-input v-model="form.uid" disabled="true" /></el-col>
           <el-col :span="2" class="line">类别</el-col>
-          <el-col :span="2"><el-input v-model="form.kind" /></el-col>
+          <el-col :span="2"><el-input v-model="form.kind" disabled="true" /></el-col>
           <el-col :span="3" class="line">发布时间</el-col>
-          <el-col :span="5"><el-input v-model="form.time" /></el-col>
+          <el-col :span="5"><el-input v-model="form.time" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">审核</el-col>
-          <el-col :span="2"><el-input v-model="form.audited" /></el-col>
+          <el-col :span="2"><el-input v-model="form.audited" disabled="true" /></el-col>
           <el-col :span="3" class="line">紧急级别</el-col>
-          <el-col :span="4"><el-input v-model="form.level" /></el-col>
+          <el-col :span="4"><el-input v-model="form.level" disabled="true" /></el-col>
           <el-col :span="2" class="line">解决</el-col>
-          <el-col :span="2"><el-input v-model="form.completed" /></el-col>
+          <el-col :span="2"><el-input v-model="form.completed" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">标题</el-col>
-          <el-col :span="21"><el-input v-model="form.title" /></el-col>
+          <el-col :span="21"><el-input v-model="form.title" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">地区</el-col>
-          <el-col :span="4"><el-input v-model="form.province" /></el-col>
+          <el-col :span="4"><el-input v-model="form.province" disabled="true" /></el-col>
           <el-col :span="1" class="line">-</el-col>
-          <el-col :span="4"><el-input v-model="form.city" /></el-col>
+          <el-col :span="4"><el-input v-model="form.city" disabled="true" /></el-col>
           <el-col :span="1" class="line">-</el-col>
-          <el-col :span="4"><el-input v-model="form.county" /></el-col>
+          <el-col :span="4"><el-input v-model="form.county" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">地址</el-col>
-          <el-col :span="21"><el-input v-model="form.address" /></el-col>
+          <el-col :span="21"><el-input v-model="form.address" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">内容</el-col>
-          <el-col :span="21"><el-input v-model="form.detail" type="textarea"/></el-col>
+          <el-col :span="21"><el-input v-model="form.detail" disabled="true" type="textarea"/></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">备注</el-col>
-          <el-col :span="21"><el-input v-model="form.note" type="textarea"/></el-col>
+          <el-col :span="21"><el-input v-model="form.note" disabled="true" type="textarea"/></el-col>
         </el-row>
         <el-row style="margin-top: 20px; text-align: right; padding-right: 40px">
           <el-button type="primary" @click="onSubmit">通过</el-button>
