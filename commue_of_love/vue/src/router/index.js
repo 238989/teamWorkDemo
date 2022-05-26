@@ -55,75 +55,130 @@ export const constantRoutes = [
   },
 
   {
-    path: '/menu1',
+    path: '/uh&rs',
     component: Layout,
-    redirect: '/menu1/menu1-1',
+    redirect: '/uh&rs/uh/',
     name: '紧急救助信息管理',
     meta: { title: '紧急救助信息管理', icon: 'dashboard2' },
     children: [
       {
-        path: 'menu1-1',
-        name: '发布审核',
-        component: () => import('@/views/menu1/menu1-1/index'),
-        meta: { title: '发布审核', icon: 'map' }
-      },
-      {
-        path: 'menu1-2',
-        name: '内容管理',
-        component: () => import('@/views/menu1/menu1-2/index'),
-        meta: { title: '内容管理', icon: 'graph' }
-      },
-      {
-        path: 'menu1-3',
-        name: '数据统计',
-        component: () => import('@/views/menu1/menu1-3/index'),
-        meta: { title: '数据统计', icon: 'chart' },
+        path: '/uh',
+        name: '求助信息',
+        component: () => import('@/views/uh&rs/uh/index'),
+        meta: { title: '求助信息', icon: 'map' },
         children: [
           {
-            path: 'menu1-3-1',
-            component: () => import('@/views/menu1/menu1-3/menu1-3-1/index'),
-            name: 'Mue1-3-1',
-            meta: { title: 'Mue1-3-1', icon: 'table' }
+            path: 'audit',
+            component: () => import('@/views/uh&rs/uh/audit'),
+            name: '发布审核',
+            meta: { title: '发布审核', icon: 'table' }
           },
           {
-            path: 'menu1-3-2',
-            component: () => import('@/views/menu1/menu1-3/menu1-3-2/index'),
-            name: 'Mue1-3-2',
-            meta: { title: 'Mue1-3-2', icon: 'dynamic' }
+            path: 'modify',
+            component: () => import('@/views/uh&rs/uh/modify'),
+            name: '内容管理',
+            meta: { title: '内容管理', icon: 'dynamic' }
+          },
+          {
+            path: 'stats',
+            component: () => import('@/views/uh&rs/uh/stats'),
+            name: '数据统计',
+            meta: { title: '数据统计', icon: 'dynamic' }
+          }
+        ]
+      },
+      {
+        path: 'rs',
+        name: '互助信息',
+        component: () => import('@/views/uh&rs/rs/index'),
+        meta: { title: '互助信息', icon: 'graph' },
+        children: [
+          {
+            path: 'audit',
+            component: () => import('@/views/uh&rs/rs/audit'),
+            name: '发布审核',
+            meta: { title: '发布审核', icon: 'table' }
+          },
+          {
+            path: 'modify',
+            component: () => import('@/views/uh&rs/rs/modify'),
+            name: '内容管理',
+            meta: { title: '内容管理', icon: 'dynamic' }
+          },
+          {
+            path: 'stats',
+            component: () => import('@/views/uh&rs/rs/stats'),
+            name: '数据统计',
+            meta: { title: '数据统计', icon: 'dynamic' }
           }
         ]
       }
     ]
-  },
-  {
-    path: '/menu2',
-    component: Layout,
-    redirect: '/menu2/menu2-1',
-    name: '日常公益信息管理',
-    meta: { title: '日常公益信息管理', icon: 'dashboard2' },
-    children: [
-      {
-        path: 'menu2-1',
-        name: '发布审核',
-        component: () => import('@/views/menu2/menu2-1/index'),
-        meta: { title: '发布审核', icon: 'map' }
-      },
-      {
-        path: 'menu2-2',
-        name: '内容管理',
-        component: () => import('@/views/menu2/menu2-2/index'),
-        meta: { title: '内容管理', icon: 'car' }
-      },
-      {
-        path: 'menu2-3',
-        name: '数据统计',
-        component: () => import('@/views/menu2/menu2-3/index'),
-        meta: { title: '数据统计', icon: 'chart' }
-      }
-    ]
-  },
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
+  //,
+  // {
+  //   path: '/menu2',
+  //   component: Layout,
+  //   redirect: '/menu2/menu2-1',
+  //   name: '日常公益信息管理',
+  //   meta: { title: '日常公益信息管理', icon: 'dashboard2' },
+  //   children: [
+  //     {
+  //       path: 'menu2-1',
+  //       name: '募捐项目',
+  //       component: () => import('@/views/menu2/menu2-1/menu2-1-1'),
+  //       meta: { title: '募捐项目', icon: 'map' },
+  //       children: [
+  //         {
+  //           path: 'menu2-1-1',
+  //           component: () => import('@/views/menu2/menu2-1/menu2-1-1/index'),
+  //           name: '发布审核',
+  //           meta: { title: '发布审核', icon: 'table' }
+  //         },
+  //         {
+  //           path: 'menu2-1-2',
+  //           component: () => import('@/views/menu2/menu2-1/menu2-1-2/index'),
+  //           name: '内容管理',
+  //           meta: { title: '内容管理', icon: 'dynamic' }
+  //         },
+  //         {
+  //           path: 'menu2-1-3',
+  //           component: () => import('@/views/menu2/menu2-1/menu2-1-3/index'),
+  //           name: '数据统计',
+  //           meta: { title: '数据统计', icon: 'dynamic' }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: 'menu2-2',
+  //       name: '志愿招募',
+  //       component: () => import('@/views/menu2/menu2-2/menu2-2-1'),
+  //       meta: { title: '志愿招募', icon: 'graph' },
+  //       children: [
+  //         {
+  //           path: 'menu1-2-1',
+  //           component: () => import('@/views/menu2/menu2-2/menu2-2-1/index'),
+  //           name: '发布审核',
+  //           meta: { title: '发布审核', icon: 'table' }
+  //         },
+  //         {
+  //           path: 'menu1-2-2',
+  //           component: () => import('@/views/menu2/menu2-2/menu2-2-2/index'),
+  //           name: '内容管理',
+  //           meta: { title: '内容管理', icon: 'dynamic' }
+  //         },
+  //         {
+  //           path: 'menu2-2-3',
+  //           component: () => import('@/views/menu2/menu2-2/menu2-2-3/index'),
+  //           name: '数据统计',
+  //           meta: { title: '数据统计', icon: 'dynamic' }
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },
+  // // 404 page must be placed at the end !!!
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
