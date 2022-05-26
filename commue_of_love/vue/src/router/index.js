@@ -48,9 +48,9 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Home',
+      name: '爱心公社',
       component: () => import('@/views/home/index'),
-      meta: { title: 'Home', icon: 'dashboard' }
+      meta: { title: '爱心公社', icon: 'dashboard' }
     }]
   },
 
@@ -58,26 +58,26 @@ export const constantRoutes = [
     path: '/menu1',
     component: Layout,
     redirect: '/menu1/menu1-1',
-    name: 'Menu1',
-    meta: { title: 'Menu1', icon: 'dashboard2' },
+    name: '紧急救助信息管理',
+    meta: { title: '紧急救助信息管理', icon: 'dashboard2' },
     children: [
       {
         path: 'menu1-1',
-        name: 'Menu1-1',
+        name: '发布审核',
         component: () => import('@/views/menu1/menu1-1/index'),
-        meta: { title: 'Menu1-1', icon: 'map' }
+        meta: { title: '发布审核', icon: 'map' }
       },
       {
         path: 'menu1-2',
-        name: 'Menu1-2',
+        name: '内容管理',
         component: () => import('@/views/menu1/menu1-2/index'),
-        meta: { title: 'Menu1-2', icon: 'graph' }
+        meta: { title: '内容管理', icon: 'graph' }
       },
       {
         path: 'menu1-3',
-        name: 'Menu1-3',
+        name: '数据统计',
         component: () => import('@/views/menu1/menu1-3/index'),
-        meta: { title: 'Menu1-3', icon: 'chart' },
+        meta: { title: '数据统计', icon: 'chart' },
         children: [
           {
             path: 'menu1-3-1',
@@ -99,26 +99,26 @@ export const constantRoutes = [
     path: '/menu2',
     component: Layout,
     redirect: '/menu2/menu2-1',
-    name: 'Menu2',
-    meta: { title: 'Menu2', icon: 'dashboard2' },
+    name: '日常公益信息管理',
+    meta: { title: '日常公益信息管理', icon: 'dashboard2' },
     children: [
       {
         path: 'menu2-1',
-        name: 'Menu2-1',
+        name: '发布审核',
         component: () => import('@/views/menu2/menu2-1/index'),
-        meta: { title: 'Menu2-1', icon: 'map' }
+        meta: { title: '发布审核', icon: 'map' }
       },
       {
         path: 'menu2-2',
-        name: 'Menu2-2',
+        name: '内容管理',
         component: () => import('@/views/menu2/menu2-2/index'),
-        meta: { title: 'Menu2-2', icon: 'car' }
+        meta: { title: '内容管理', icon: 'car' }
       },
       {
         path: 'menu2-3',
-        name: 'Menu2-3',
+        name: '数据统计',
         component: () => import('@/views/menu2/menu2-3/index'),
-        meta: { title: 'Menu2-3', icon: 'chart' }
+        meta: { title: '数据统计', icon: 'chart' }
       }
     ]
   },
