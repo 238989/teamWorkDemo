@@ -114,71 +114,70 @@ export const constantRoutes = [
         ]
       }
     ]
-  }
-  //,
-  // {
-  //   path: '/menu2',
-  //   component: Layout,
-  //   redirect: '/menu2/menu2-1',
-  //   name: '日常公益信息管理',
-  //   meta: { title: '日常公益信息管理', icon: 'dashboard2' },
-  //   children: [
-  //     {
-  //       path: 'menu2-1',
-  //       name: '募捐项目',
-  //       component: () => import('@/views/menu2/menu2-1/menu2-1-1'),
-  //       meta: { title: '募捐项目', icon: 'map' },
-  //       children: [
-  //         {
-  //           path: 'menu2-1-1',
-  //           component: () => import('@/views/menu2/menu2-1/menu2-1-1/index'),
-  //           name: '发布审核',
-  //           meta: { title: '发布审核', icon: 'table' }
-  //         },
-  //         {
-  //           path: 'menu2-1-2',
-  //           component: () => import('@/views/menu2/menu2-1/menu2-1-2/index'),
-  //           name: '内容管理',
-  //           meta: { title: '内容管理', icon: 'dynamic' }
-  //         },
-  //         {
-  //           path: 'menu2-1-3',
-  //           component: () => import('@/views/menu2/menu2-1/menu2-1-3/index'),
-  //           name: '数据统计',
-  //           meta: { title: '数据统计', icon: 'dynamic' }
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       path: 'menu2-2',
-  //       name: '志愿招募',
-  //       component: () => import('@/views/menu2/menu2-2/menu2-2-1'),
-  //       meta: { title: '志愿招募', icon: 'graph' },
-  //       children: [
-  //         {
-  //           path: 'menu1-2-1',
-  //           component: () => import('@/views/menu2/menu2-2/menu2-2-1/index'),
-  //           name: '发布审核',
-  //           meta: { title: '发布审核', icon: 'table' }
-  //         },
-  //         {
-  //           path: 'menu1-2-2',
-  //           component: () => import('@/views/menu2/menu2-2/menu2-2-2/index'),
-  //           name: '内容管理',
-  //           meta: { title: '内容管理', icon: 'dynamic' }
-  //         },
-  //         {
-  //           path: 'menu2-2-3',
-  //           component: () => import('@/views/menu2/menu2-2/menu2-2-3/index'),
-  //           name: '数据统计',
-  //           meta: { title: '数据统计', icon: 'dynamic' }
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // },
-  // // 404 page must be placed at the end !!!
-  // { path: '*', redirect: '/404', hidden: true }
+  },
+  {
+    path: '/dn&vl',
+    component: Layout,
+    redirect: '/dn&vl/dn',
+    name: '日常公益信息管理',
+    meta: { title: '日常公益信息管理', icon: 'dashboard2' },
+    children: [
+      {
+        path: 'dn',
+        name: '募捐项目',
+        component: () => import('@/views/dn&vl/dn/index'),
+        meta: { title: '募捐项目', icon: 'map' },
+        children: [
+          {
+            path: 'audit',
+            component: () => import('@/views/dn&vl/dn/audit'),
+            name: '发布审核',
+            meta: { title: '发布审核', icon: 'table' }
+          },
+          {
+            path: 'modify',
+            component: () => import('@/views/dn&vl/dn/modify'),
+            name: '内容管理',
+            meta: { title: '内容管理', icon: 'dynamic' }
+          },
+          {
+            path: 'stats',
+            component: () => import('@/views/dn&vl/dn/stats'),
+            name: '数据统计',
+            meta: { title: '数据统计', icon: 'dynamic' }
+          }
+        ]
+      },
+      {
+        path: 'vl',
+        name: '志愿招募',
+        component: () => import('@/views/dn&vl/vl/index'),
+        meta: { title: '志愿招募', icon: 'graph' },
+        children: [
+          {
+            path: 'audit',
+            component: () => import('@/views/dn&vl/vl/audit'),
+            name: '发布审核',
+            meta: { title: '发布审核', icon: 'table' }
+          },
+          {
+            path: 'modify',
+            component: () => import('@/views/dn&vl/vl/modify'),
+            name: '内容管理',
+            meta: { title: '内容管理', icon: 'dynamic' }
+          },
+          {
+            path: 'stats',
+            component: () => import('@/views/dn&vl/vl/stats'),
+            name: '数据统计',
+            meta: { title: '数据统计', icon: 'dynamic' }
+          }
+        ]
+      }
+    ]
+  },
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({

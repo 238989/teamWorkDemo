@@ -14,15 +14,14 @@
       <el-table-column
         prop="kind"
         label="类别"
-        width="70"
-        :filters="[{ text: '物资', value: '物资' }, { text: '捐款', value: '捐款' }, { text: '其他', value: '其他' }]"
+        width="120"
+        :filters="[{ text: '物资', value: '物资' }, { text: '捐款', value: '捐款' }]"
         filter-placement="bottom-end"
       />
       <el-table-column prop="uid" label="求助账号" sortable width="130" />
       <el-table-column prop="province" label="所在地区" sortable width="140" />
-      <el-table-column prop="available_time" label="提供时间" width="120" />
-      <el-table-column prop="available" label="剩余" width="60" />
       <el-table-column prop="time" label="发布时间" sortable width="170" />
+      <el-table-column prop="available" label="项目状态" sortable width="130" />
       <el-table-column label="操作" width="80">
         <template slot-scope="scope">
           <el-button
@@ -57,8 +56,8 @@
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">审核</el-col>
           <el-col :span="2"><el-input v-model="form.audited" disabled="true" /></el-col>
-          <el-col :span="3" class="line">是否剩余</el-col>
-          <el-col :span="4">
+          <el-col :span="3" class="line">项目状态</el-col>
+          <el-col :span="3">
             <el-select v-model="form.available" placeholder="请选择">
               <el-option
                 v-for="item in availableOptions"
@@ -68,8 +67,6 @@
               />
             </el-select>
           </el-col>
-          <el-col :span="2" class="line">提供时间</el-col>
-          <el-col :span="10"><el-input v-model="form.available_time" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">标题</el-col>
@@ -108,7 +105,7 @@
 </template>
 
 <script>
-import { regionData,TextToCode } from 'element-china-area-data/dist/app' // 地址级联选择器
+import { regionData, TextToCode } from 'element-china-area-data/dist/app' // 地址级联选择器
 
 export default {
   data() {
@@ -120,8 +117,7 @@ export default {
         kind: '',
         time: '',
         audited: '',
-        level: '',
-        completed: '',
+        available: '',
         title: '',
         province: '',
         city: '',
@@ -130,38 +126,34 @@ export default {
         detail: '',
         note: ''
       },
-      dialogFormVisible: false,
       // 地区选项
       options: regionData,
       selectedOptions: [],
       availableOptions: [
         {
-          value: '是',
-          label: '是'
+          value: '进行中',
+          label: '进行中'
         },
         {
-          value: '否',
-          label: '否'
+          value: '已结束',
+          label: '已结束'
         }
       ],
       kindOptions: [
         {
-          value: '物资',
-          label: '物资'
+          value: '长期',
+          label: '长期'
         },
         {
-          value: '捐款',
-          label: '捐款'
-        },
-        {
-          value: '其他',
-          label: '其他'
+          value: '短期',
+          label: '短期'
         }
-      ]
+      ],
+      dialogFormVisible: false
     }
   },
   created() {
-    this.$axios('/rs/findAll').then(res => {
+    this.$axios('/vl/findAll').then(res => {
       this.tableData = res.data
       console.log(res.data)
     }).catch(function(error) {
@@ -178,23 +170,12 @@ export default {
       this.form.kind = row['kind']
       this.form.time = row['time']
       this.form.audited = row['audited']
-      this.form.available_time = row['available_time']
       this.form.available = row['available']
       this.form.title = row['title']
       this.selectedOptions = TextToCode[row['province']][row['city']][row['county']].code
       this.form.address = row['address']
       this.form.detail = row['detail']
       this.form.note = row['note']
-    },
-    submit() {
-      const pcd = this.$refs['regionCat'].getCheckedNodes()[0].pathLabels
-      console.log('pcd=' + pcd)
-      console.log('province=' + pcd[0])
-      console.log('city=' + pcd[1])
-      console.log('county=' + pcd[2])
-      //  把数据传回后端
-      this.$message('修改成功！')
-      this.dialogFormVisible = false
     },
     cancel() {
       this.dialogFormVisible = false

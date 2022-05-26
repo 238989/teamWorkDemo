@@ -19,16 +19,7 @@
         filter-placement="bottom-end"
       />
       <el-table-column prop="uid" label="发布账号" sortable width="130" />
-      <!--      <el-table-column prop="detail" label="详细内容" v-if="false"/>-->
       <el-table-column prop="province" label="所在地区" sortable width="140" />
-      <!--      <el-table-column prop="city" label="所在市" v-if="false"/>-->
-      <!--      <el-table-column prop="county" label="所在县" v-if="false"/>-->
-      <!--      <el-table-column prop="address" label="详细地址" v-if="false"/>-->
-      <!--      <el-table-column prop="contact" label="联系电话" v-if="false"/>-->
-      <!--      <el-table-column prop="note" label="备注" v-if="false"/>-->
-      <!--      <el-table-column prop="audited" label="审核状态" v-if="false"/>-->
-      <!--      <el-table-column prop="level" label="紧急级别" sortable width="130" />-->
-      <el-table-column prop="available_time" label="提供时间" width="120" />
       <el-table-column prop="available" label="剩余" width="60" />
       <el-table-column prop="time" label="发布时间" sortable width="170" />
       <el-table-column label="操作" width="210">

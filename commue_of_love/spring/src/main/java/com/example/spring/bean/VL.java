@@ -1,8 +1,8 @@
 package com.example.spring.bean;
 
-public class RS {
+public class VL {
     private int id;
-    private String time,title,kind,uid,detail,province,city,county,address,available_time,available,note,audited;
+    private String time,title,kind,uid,detail,province,city,county,address,available,note,audited;
 
     public int getId() {
         return id;
@@ -82,14 +82,6 @@ public class RS {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getAvailable_time() {
-        return available_time;
-    }
-
-    public void setAvailable_time(String available_time) {
-        this.available_time = available_time;
     }
 
     public String getAvailable() {

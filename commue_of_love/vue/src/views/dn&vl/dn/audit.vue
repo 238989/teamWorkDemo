@@ -14,21 +14,28 @@
       <el-table-column
         prop="kind"
         label="类别"
-        width="70"
-        :filters="[{ text: '物资', value: '物资' }, { text: '捐款', value: '捐款' }, { text: '其他', value: '其他' }]"
+        width="120"
+        :filters="[{ text: '物资', value: '物资' }, { text: '捐款', value: '捐款' }]"
         filter-placement="bottom-end"
       />
       <el-table-column prop="uid" label="求助账号" sortable width="130" />
       <el-table-column prop="province" label="所在地区" sortable width="140" />
-      <el-table-column prop="available_time" label="提供时间" width="120" />
-      <el-table-column prop="available" label="剩余" width="60" />
       <el-table-column prop="time" label="发布时间" sortable width="170" />
-      <el-table-column label="操作" width="80">
+      <el-table-column label="操作" width="210">
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="modify(scope.$index, scope.row)"
-          >修改</el-button>
+            @click="getMore(scope.$index, scope.row)"
+          >查看</el-button>
+          <el-button
+            size="mini"
+            @click="handleEdit(scope.$index, scope.row)"
+          >通过</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
+          >驳回</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -41,39 +48,19 @@
           <el-col :span="3" class="line">发布账号</el-col>
           <el-col :span="4"><el-input v-model="form.uid" disabled="true" /></el-col>
           <el-col :span="2" class="line">类别</el-col>
-          <el-col :span="2">
-            <el-select v-model="form.kind" placeholder="请选择">
-              <el-option
-                v-for="item in kindOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-col>
+          <el-col :span="2"><el-input v-model="form.kind" disabled="true" /></el-col>
           <el-col :span="3" class="line">发布时间</el-col>
           <el-col :span="5"><el-input v-model="form.time" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">审核</el-col>
           <el-col :span="2"><el-input v-model="form.audited" disabled="true" /></el-col>
-          <el-col :span="3" class="line">是否剩余</el-col>
-          <el-col :span="4">
-            <el-select v-model="form.available" placeholder="请选择">
-              <el-option
-                v-for="item in availableOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-col>
-          <el-col :span="2" class="line">提供时间</el-col>
-          <el-col :span="10"><el-input v-model="form.available_time" disabled="true" /></el-col>
+          <el-col :span="3" class="line">项目状态</el-col>
+          <el-col :span="2"><el-input v-model="form.available" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">标题</el-col>
-          <el-col :span="21"><el-input v-model="form.title" /></el-col>
+          <el-col :span="21"><el-input v-model="form.title" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">地址</el-col>
@@ -85,22 +72,24 @@
               size="large"
               :options="options"
               placeholder="请选择"
+              disabled="true"
             />
           </el-col>
           <el-col :span="1" class="line">-</el-col>
-          <el-col :span="12"><el-input v-model="form.address" /></el-col>
+          <el-col :span="12"><el-input v-model="form.address" disabled="true" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">内容</el-col>
-          <el-col :span="21"><el-input v-model="form.detail" type="textarea" /></el-col>
+          <el-col :span="21"><el-input v-model="form.detail" disabled="true" type="textarea" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">备注</el-col>
-          <el-col :span="21"><el-input v-model="form.note" type="textarea" /></el-col>
+          <el-col :span="21"><el-input v-model="form.note" disabled="true" type="textarea" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px; text-align: right; padding-right: 40px">
-          <el-button type="primary" @click="submit">保存并关闭</el-button>
-          <el-button @click="cancel">不保存，直接关闭</el-button>
+          <el-button type="primary" @click="onSubmit">通过</el-button>
+          <el-button type="warning" @click="onSubmit">驳回</el-button>
+          <el-button @click="cancel">关闭</el-button>
         </el-row>
       </el-form>
     </el-dialog>
@@ -120,8 +109,7 @@ export default {
         kind: '',
         time: '',
         audited: '',
-        level: '',
-        completed: '',
+        available: '',
         title: '',
         province: '',
         city: '',
@@ -130,38 +118,14 @@ export default {
         detail: '',
         note: ''
       },
-      dialogFormVisible: false,
       // 地区选项
       options: regionData,
       selectedOptions: [],
-      availableOptions: [
-        {
-          value: '是',
-          label: '是'
-        },
-        {
-          value: '否',
-          label: '否'
-        }
-      ],
-      kindOptions: [
-        {
-          value: '物资',
-          label: '物资'
-        },
-        {
-          value: '捐款',
-          label: '捐款'
-        },
-        {
-          value: '其他',
-          label: '其他'
-        }
-      ]
+      dialogFormVisible: false
     }
   },
   created() {
-    this.$axios('/rs/findAll').then(res => {
+    this.$axios('/dn/findAll').then(res => {
       this.tableData = res.data
       console.log(res.data)
     }).catch(function(error) {
@@ -169,7 +133,7 @@ export default {
     })
   },
   methods: {
-    modify(index, row) {
+    getMore(index, row) {
       // this.$message(row['title'])
       console.log(index, row)
       this.dialogFormVisible = true
@@ -178,23 +142,12 @@ export default {
       this.form.kind = row['kind']
       this.form.time = row['time']
       this.form.audited = row['audited']
-      this.form.available_time = row['available_time']
       this.form.available = row['available']
       this.form.title = row['title']
       this.selectedOptions = TextToCode[row['province']][row['city']][row['county']].code
       this.form.address = row['address']
       this.form.detail = row['detail']
       this.form.note = row['note']
-    },
-    submit() {
-      const pcd = this.$refs['regionCat'].getCheckedNodes()[0].pathLabels
-      console.log('pcd=' + pcd)
-      console.log('province=' + pcd[0])
-      console.log('city=' + pcd[1])
-      console.log('county=' + pcd[2])
-      //  把数据传回后端
-      this.$message('修改成功！')
-      this.dialogFormVisible = false
     },
     cancel() {
       this.dialogFormVisible = false
