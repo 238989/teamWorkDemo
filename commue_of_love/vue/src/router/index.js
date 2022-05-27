@@ -45,12 +45,12 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/love',
     children: [{
-      path: 'dashboard',
+      path: 'love',
       name: '爱心公社',
       component: () => import('@/views/home/index'),
-      meta: { title: '爱心公社', icon: 'dashboard' }
+      meta: { title: '爱心公社', icon: 'love' }
     }]
   },
 
@@ -59,31 +59,31 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/uh&rs/uh/',
     name: '紧急救助信息管理',
-    meta: { title: '紧急救助信息管理', icon: 'dashboard2' },
+    meta: { title: '紧急救助信息管理', icon: 'uh_rs' },
     children: [
       {
         path: '/uh',
         name: '求助信息',
         component: () => import('@/views/uh&rs/uh/index'),
-        meta: { title: '求助信息', icon: 'map' },
+        meta: { title: '求助信息', icon: 'uh' },
         children: [
           {
             path: 'audit',
             component: () => import('@/views/uh&rs/uh/audit'),
             name: '发布审核',
-            meta: { title: '发布审核', icon: 'table' }
+            meta: { title: '发布审核', icon: 'audit' }
           },
           {
             path: 'modify',
             component: () => import('@/views/uh&rs/uh/modify'),
             name: '内容管理',
-            meta: { title: '内容管理', icon: 'dynamic' }
+            meta: { title: '内容管理', icon: 'modify' }
           },
           {
             path: 'stats',
             component: () => import('@/views/uh&rs/uh/stats'),
             name: '数据统计',
-            meta: { title: '数据统计', icon: 'dynamic' }
+            meta: { title: '数据统计', icon: 'chart' }
           }
         ]
       },
@@ -91,25 +91,25 @@ export const constantRoutes = [
         path: 'rs',
         name: '互助信息',
         component: () => import('@/views/uh&rs/rs/index'),
-        meta: { title: '互助信息', icon: 'graph' },
+        meta: { title: '互助信息', icon: 'rs' },
         children: [
           {
             path: 'audit',
             component: () => import('@/views/uh&rs/rs/audit'),
             name: '发布审核',
-            meta: { title: '发布审核', icon: 'table' }
+            meta: { title: '发布审核', icon: 'audit' }
           },
           {
             path: 'modify',
             component: () => import('@/views/uh&rs/rs/modify'),
             name: '内容管理',
-            meta: { title: '内容管理', icon: 'dynamic' }
+            meta: { title: '内容管理', icon: 'modify' }
           },
           {
             path: 'stats',
             component: () => import('@/views/uh&rs/rs/stats'),
             name: '数据统计',
-            meta: { title: '数据统计', icon: 'dynamic' }
+            meta: { title: '数据统计', icon: 'chart' }
           }
         ]
       }
@@ -120,31 +120,31 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/dn&vl/dn',
     name: '日常公益信息管理',
-    meta: { title: '日常公益信息管理', icon: 'dashboard2' },
+    meta: { title: '日常公益信息管理', icon: 'uh_rs' },
     children: [
       {
         path: 'dn',
         name: '募捐项目',
         component: () => import('@/views/dn&vl/dn/index'),
-        meta: { title: '募捐项目', icon: 'map' },
+        meta: { title: '募捐项目', icon: 'dn' },
         children: [
           {
             path: 'audit',
             component: () => import('@/views/dn&vl/dn/audit'),
             name: '发布审核',
-            meta: { title: '发布审核', icon: 'table' }
+            meta: { title: '发布审核', icon: 'audit' }
           },
           {
             path: 'modify',
             component: () => import('@/views/dn&vl/dn/modify'),
             name: '内容管理',
-            meta: { title: '内容管理', icon: 'dynamic' }
+            meta: { title: '内容管理', icon: 'modify' }
           },
           {
             path: 'stats',
             component: () => import('@/views/dn&vl/dn/stats'),
             name: '数据统计',
-            meta: { title: '数据统计', icon: 'dynamic' }
+            meta: { title: '数据统计', icon: 'chart' }
           }
         ]
       },
@@ -152,25 +152,25 @@ export const constantRoutes = [
         path: 'vl',
         name: '志愿招募',
         component: () => import('@/views/dn&vl/vl/index'),
-        meta: { title: '志愿招募', icon: 'graph' },
+        meta: { title: '志愿招募', icon: 'vl' },
         children: [
           {
             path: 'audit',
             component: () => import('@/views/dn&vl/vl/audit'),
             name: '发布审核',
-            meta: { title: '发布审核', icon: 'table' }
+            meta: { title: '发布审核', icon: 'audit' }
           },
           {
             path: 'modify',
             component: () => import('@/views/dn&vl/vl/modify'),
             name: '内容管理',
-            meta: { title: '内容管理', icon: 'dynamic' }
+            meta: { title: '内容管理', icon: 'modify' }
           },
           {
             path: 'stats',
             component: () => import('@/views/dn&vl/vl/stats'),
             name: '数据统计',
-            meta: { title: '数据统计', icon: 'dynamic' }
+            meta: { title: '数据统计', icon: 'chart' }
           }
         ]
       }
