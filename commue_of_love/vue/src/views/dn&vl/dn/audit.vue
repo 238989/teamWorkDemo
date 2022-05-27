@@ -21,21 +21,12 @@
       <el-table-column prop="uid" label="求助账号" sortable width="130" />
       <el-table-column prop="province" label="所在地区" sortable width="140" />
       <el-table-column prop="time" label="发布时间" sortable width="170" />
-      <el-table-column label="操作" width="210">
+      <el-table-column label="操作" width="80">
         <template slot-scope="scope">
           <el-button
             size="mini"
             @click="getMore(scope.$index, scope.row)"
           >查看</el-button>
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.$index, scope.row)"
-          >通过</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-          >驳回</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -87,8 +78,8 @@
           <el-col :span="21"><el-input v-model="form.note" disabled="true" type="textarea" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px; text-align: right; padding-right: 40px">
-          <el-button type="primary" @click="onSubmit">通过</el-button>
-          <el-button type="warning" @click="onSubmit">驳回</el-button>
+          <el-button type="primary" @click="pass">通过</el-button>
+          <el-button type="warning" @click="fail">驳回</el-button>
           <el-button @click="cancel">关闭</el-button>
         </el-row>
       </el-form>
@@ -124,15 +115,33 @@ export default {
       dialogFormVisible: false
     }
   },
-  created() {
-    this.$axios('/dn/findAll').then(res => {
-      this.tableData = res.data
-      console.log(res.data)
-    }).catch(function(error) {
-      console.log(error)
-    })
+  mounted: function() {
+    this.loadDN()
   },
   methods: {
+    loadDN() {
+      const _this = this
+      this.$axios.post('/dn/unaudited', {
+        id: '',
+        uid: '',
+        kind: '',
+        time: '',
+        audited: 'unaudited',
+        available: '',
+        available_time: '',
+        title: '',
+        province: '',
+        city: '',
+        county: '',
+        address: '',
+        detail: '',
+        note: ''
+      }).then(resp => {
+        if (resp && resp.status === 200) {
+          _this.tableData = resp.data
+        }
+      })
+    },
     getMore(index, row) {
       // this.$message(row['title'])
       console.log(index, row)
@@ -148,6 +157,72 @@ export default {
       this.form.address = row['address']
       this.form.detail = row['detail']
       this.form.note = row['note']
+    },
+    pass() {
+      const _this = this
+      this.$confirm('是否确认【通过】该内容？', '提示', {
+        confirmButtonText: '确认通过',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$axios.post('/dn/audited', {
+          id: _this.form.id,
+          uid: '',
+          kind: '',
+          time: '',
+          audited: 'passed',
+          available: '',
+          available_time: '',
+          title: '',
+          province: '',
+          city: '',
+          county: '',
+          address: '',
+          detail: '',
+          note: ''
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.$message({ type: 'success', message: '该内容已成功【通过】!' })
+            _this.dialogFormVisible = false
+            _this.loadDN()
+          }
+        }).catch(() => {
+          this.$message({ type: 'info', message: '已取消操作！' })
+        })
+      })
+    },
+    fail() {
+      const _this = this
+      this.$confirm('是否确认【驳回】该内容？', '提示', {
+        confirmButtonText: '确认驳回',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$axios.post('/dn/audited', {
+          id: _this.form.id,
+          uid: '',
+          kind: '',
+          time: '',
+          audited: 'failed',
+          available: '',
+          available_time: '',
+          title: '',
+          province: '',
+          city: '',
+          county: '',
+          address: '',
+          detail: '',
+          note: ''
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.$message({ type: 'success', message: '该内容已成功【驳回】!' })
+            _this.dialogFormVisible = false
+            _this.loadDN()
+          }
+        }).catch(() => {
+          this.$message({ type: 'info', message: '已取消操作！' })
+        })
+      })
     },
     cancel() {
       this.dialogFormVisible = false

@@ -206,6 +206,7 @@ export default {
         }).then(resp => {
           if (resp && resp.status === 200) {
             _this.$message({ type: 'success', message: '该内容已成功【通过】!' })
+            _this.dialogFormVisible = false
             _this.loadUH()
           }
         }).catch(() => {
@@ -238,6 +239,7 @@ export default {
         }).then(resp => {
           if (resp && resp.status === 200) {
             _this.$message({ type: 'success', message: '该内容已成功【驳回】!' })
+            _this.dialogFormVisible = false
             _this.loadUH()
           }
         }).catch(() => {

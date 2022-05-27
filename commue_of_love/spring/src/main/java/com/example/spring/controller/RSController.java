@@ -4,63 +4,64 @@ import com.example.spring.pojo.RS;
 import com.example.spring.service.RSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/rs")
 public class RSController {
     @Autowired
     private RSService rsService;
 
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
-    public List<RS> findAll() {
+    @RequestMapping("/api/rs/all")
+    public List<RS> findAll() throws Exception {
         System.out.println("查询所有数据:");
         return rsService.findAll();
     }
 
-    @RequestMapping(value = "/findByID", method = RequestMethod.GET)
-    public RS findByID(@RequestParam(value = "id", required = true) int id) {
-        System.out.println("ID:"+id);
-        System.out.println("根据ID查询数据:");
-        return rsService.findByID(id);
-    }
-
     @CrossOrigin
-    @GetMapping("/findByAudited")
-    public List<RS> findByAudited(@RequestParam("audited") String audited) {
-        System.out.println("审核状态:"+audited);
-        System.out.println("根据审核状态查询数据:");
-        if(audited.equals("unaudited")){
+    @PostMapping(value = "/api/rs/unaudited")
+    @ResponseBody
+    public List<RS> findByAudited(@RequestBody RS requestRS) {
+        // 对 html 标签进行转义，防止 XSS 攻击
+        String audit = requestRS.getAudited();
+        audit = HtmlUtils.htmlEscape(audit);
+
+        System.out.println("根据审核状态查询数据:audit=" + audit);
+        if(audit.equals("unaudited")){
             return rsService.findByAudited("待审核");
         }else{
             return rsService.findByAudited("已审核");
         }
     }
 
-    @RequestMapping(value = "/findByUid", method = RequestMethod.GET)
-    public List<RS> findByUid(@RequestParam(value = "uid", required = true) String uid) {
-        System.out.println("发起人账号:"+uid);
-        System.out.println("根据发起人账号查询数据:");
-        return rsService.findByAudited(uid);
+    @CrossOrigin
+    @PostMapping("/api/rs/audited")
+    @ResponseBody
+    public boolean updateAudited(@RequestBody RS requestRS) {
+        int id = requestRS.getId();
+        String audited = requestRS.getAudited();
+        System.out.println("id=" + id);
+        System.out.println("audited=" + audited);
+
+        if ("passed".equals(audited)) {
+            System.out.println("通过");
+            return true;
+//            return rsService.updateAudited(id, "已通过");
+        } else {
+            System.out.println("驳回");
+            return false;
+//            return rsService.updateAudited(id, "已驳回");
+        }
     }
 
-    @RequestMapping(value = "/findByKeyword", method = RequestMethod.GET)
-    public List<RS> findByKeyword(@RequestParam(value = "keyword", required = true) String keyword) {
-        System.out.println("关键词:"+keyword);
-        System.out.println("根据关键词模糊查询数据:");
-        return rsService.findByKeyword(keyword);
-    }
+    @CrossOrigin
+    @PostMapping("/api/rs/modify")
+    @ResponseBody
+    public boolean updateInfo(@RequestBody RS requestRS) {
+        System.out.println("id=" + requestRS.getId());
+        System.out.println("修改");
 
-    @RequestMapping(value = "/updateAudited", method = RequestMethod.PUT)
-    public boolean updateAudited(@RequestBody int id, String audited) {
-        System.out.println("修改审核状态：");
-        return rsService.updateAudited(id, audited);
-    }
-
-    @RequestMapping(value = "/updateInfo", method = RequestMethod.PUT)
-    public boolean updateInfo(@RequestBody RS rs) {
-        System.out.println("修改其他信息：");
-        return rsService.updateInfo(rs);
+        return rsService.updateInfo(requestRS);
     }
 }

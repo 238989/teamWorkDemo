@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { regionData,TextToCode } from 'element-china-area-data/dist/app' // 地址级联选择器
+import { regionData, TextToCode } from 'element-china-area-data/dist/app' // 地址级联选择器
 
 export default {
   data() {
@@ -120,8 +120,8 @@ export default {
         kind: '',
         time: '',
         audited: '',
-        level: '',
-        completed: '',
+        available: '',
+        available_time: '',
         title: '',
         province: '',
         city: '',
@@ -160,15 +160,18 @@ export default {
       ]
     }
   },
-  created() {
-    this.$axios('/rs/findAll').then(res => {
-      this.tableData = res.data
-      console.log(res.data)
-    }).catch(function(error) {
-      console.log(error)
-    })
+  mounted: function() {
+    this.loadRS()
   },
   methods: {
+    loadRS() {
+      const _this = this
+      this.$axios.get('/rs/all').then(resp => {
+        if (resp && resp.status === 200) {
+          _this.tableData = resp.data
+        }
+      })
+    },
     modify(index, row) {
       // this.$message(row['title'])
       console.log(index, row)
@@ -193,8 +196,37 @@ export default {
       console.log('city=' + pcd[1])
       console.log('county=' + pcd[2])
       //  把数据传回后端
-      this.$message('修改成功！')
-      this.dialogFormVisible = false
+      const _this = this
+      this.$confirm('是否确认【修改】该内容？', '提示', {
+        confirmButtonText: '确认修改',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$axios.post('/rs/modify', {
+          id: _this.form.id,
+          uid: _this.form.uid,
+          kind: _this.form.kind,
+          time: _this.form.time,
+          audited: _this.form.audited,
+          available: _this.form.available,
+          available_time: _this.form.available_time,
+          title: _this.form.title,
+          province: pcd[0],
+          city: pcd[1],
+          county: pcd[2],
+          address: _this.form.address,
+          detail: _this.form.detail,
+          note: _this.form.note
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.$message({ type: 'success', message: '该内容已成功【修改】!' })
+            _this.dialogFormVisible = false
+            _this.loadRS()
+          }
+        }).catch(() => {
+          this.$message({ type: 'info', message: '已取消操作！' })
+        })
+      })
     },
     cancel() {
       this.dialogFormVisible = false
