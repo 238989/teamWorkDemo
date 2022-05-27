@@ -1,6 +1,6 @@
 package com.example.spring.controller;
 
-import com.example.spring.bean.RS;
+import com.example.spring.pojo.RS;
 import com.example.spring.service.RSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

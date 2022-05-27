@@ -73,7 +73,6 @@
                 :value="item.value"
               />
             </el-select>
-            <!--            <el-input v-model="form.kind" />-->
           </el-col>
           <el-col :span="3" class="line">发布时间</el-col>
           <el-col :span="5"><el-input v-model="form.time" disabled="true" /></el-col>
@@ -91,7 +90,6 @@
                 :value="item.value"
               />
             </el-select>
-            <!--            <el-input v-model="form.level" />-->
           </el-col>
           <el-col :span="2" class="line">解决</el-col>
           <el-col :span="3">
@@ -103,7 +101,6 @@
                 :value="item.value"
               />
             </el-select>
-          <!--            <el-input v-model="form.completed" />-->
           </el-col>
         </el-row>
         <el-row style="margin-top: 20px">
@@ -124,17 +121,6 @@
           </el-col>
           <el-col :span="1" class="line">-</el-col>
           <el-col :span="12"><el-input v-model="form.address" /></el-col>
-        <!--          <el-col :span="4"><el-input v-model="form.province" /></el-col>-->
-        <!--          <el-col :span="4"><el-input v-model="form.city" /></el-col>-->
-        <!--          <el-col :span="1" class="line">-</el-col>-->
-        <!--          <el-col :span="4"><el-input v-model="form.county" /></el-col>-->
-        <!--        </el-row>-->
-        <!--        <el-row style="margin-top: 20px">-->
-        <!--          <el-col :span="2" class="line">地址</el-col>-->
-        <!--          <el-col :span="14">-->
-        <!--            <v-distpicker v-show="true" :province="form.province" :city="form.city" :area="form.county" @selected="pcdSelect"></v-distpicker>-->
-        <!--          </el-col>-->
-        <!--        </el-row>-->
         </el-row>
         <el-row style="margin-top: 20px">
           <el-col :span="2" class="line">内容</el-col>
@@ -155,7 +141,7 @@
 
 <script>
 import { regionData } from 'element-china-area-data/dist/app'
-import {TextToCode} from "element-china-area-data"; // 地址级联选择器
+import { TextToCode } from 'element-china-area-data' // 地址级联选择器
 
 export default {
   data() {
@@ -222,15 +208,18 @@ export default {
       ]
     }
   },
-  created() {
-    this.$axios('/uh/findAll').then(res => {
-      this.tableData = res.data
-      console.log(res.data)
-    }).catch(function(error) {
-      console.log(error)
-    })
+  mounted: function() {
+    this.loadUH()
   },
   methods: {
+    loadUH() {
+      const _this = this
+      this.$axios.get('/uh/all').then(resp => {
+        if (resp && resp.status === 200) {
+          _this.tableData = resp.data
+        }
+      })
+    },
     tagType(lvl) {
       if (lvl === '紧急') {
         return 'danger'
@@ -241,7 +230,6 @@ export default {
       }
     },
     modify(index, row) {
-      // this.$message(row['title'])
       console.log(index, row)
       this.dialogFormVisible = true
       this.form.id = row['id']
@@ -264,7 +252,36 @@ export default {
       console.log('city=' + pcd[1])
       console.log('county=' + pcd[2])
       //  把数据传回后端
-      this.$message('修改成功！')
+      const _this = this
+      this.$confirm('是否确认【修改】该内容？', '提示', {
+        confirmButtonText: '确认修改',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$axios.post('/uh/modify', {
+          id: _this.form.id,
+          uid: _this.form.uid,
+          kind: _this.form.kind,
+          time: _this.form.time,
+          audited: _this.form.audited,
+          level: _this.form.level,
+          completed: _this.form.completed,
+          title: _this.form.title,
+          province: pcd[0],
+          city: pcd[1],
+          county: pcd[2],
+          address: _this.form.address,
+          detail: _this.form.detail,
+          note: _this.form.note
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.$message({ type: 'success', message: '该内容已成功【修改】!' })
+            _this.loadUH()
+          }
+        }).catch(() => {
+          this.$message({ type: 'info', message: '已取消操作！' })
+        })
+      })
       this.dialogFormVisible = false
     },
     cancel() {

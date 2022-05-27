@@ -1,6 +1,6 @@
 package com.example.spring.controller;
 
-import com.example.spring.bean.VL;
+import com.example.spring.pojo.VL;
 import com.example.spring.service.VLService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.example.spring.service;
 
-import com.example.spring.bean.RS;
+import com.example.spring.pojo.RS;
 
 import java.util.List;
 

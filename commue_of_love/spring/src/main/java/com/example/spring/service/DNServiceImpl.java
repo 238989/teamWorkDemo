@@ -1,6 +1,6 @@
 package com.example.spring.service;
 
-import com.example.spring.bean.DN;
+import com.example.spring.pojo.DN;
 import com.example.spring.dao.DNDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.example.spring.service;
 
-import com.example.spring.bean.DN;
+import com.example.spring.pojo.DN;
 
 import java.util.List;
 

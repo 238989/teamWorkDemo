@@ -1,6 +1,6 @@
 package com.example.spring.dao;
 
-import com.example.spring.bean.RS;
+import com.example.spring.pojo.RS;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { regionData,TextToCode } from 'element-china-area-data/dist/app' // 地址级联选择器
+import { regionData, TextToCode } from 'element-china-area-data/dist/app' // 地址级联选择器
 
 export default {
   data() {

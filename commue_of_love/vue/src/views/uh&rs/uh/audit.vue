@@ -19,16 +19,7 @@
         filter-placement="bottom-end"
       />
       <el-table-column prop="uid" label="求助账号" sortable width="130" />
-      <!--      <el-table-column prop="detail" label="详细内容" v-if="false"/>-->
       <el-table-column prop="province" label="所在地区" sortable width="140" />
-      <!--      <el-table-column prop="city" label="所在市" v-if="false"/>-->
-      <!--      <el-table-column prop="county" label="所在县" v-if="false"/>-->
-      <!--      <el-table-column prop="address" label="详细地址" v-if="false"/>-->
-      <!--      <el-table-column prop="completed" label="是否解决" v-if="false"/>-->
-      <!--      <el-table-column prop="contact" label="联系电话" v-if="false"/>-->
-      <!--      <el-table-column prop="note" label="备注" v-if="false"/>-->
-      <!--      <el-table-column prop="audited" label="审核状态" v-if="false"/>-->
-      <!--      <el-table-column prop="level" label="紧急级别" sortable width="130" />-->
       <el-table-column
         prop="level"
         label="紧急级别"
@@ -45,21 +36,12 @@
         </template>
       </el-table-column>
       <el-table-column prop="time" label="发布时间" sortable width="170" />
-      <el-table-column label="操作" width="210">
+      <el-table-column label="操作" width="80">
         <template slot-scope="scope">
           <el-button
             size="mini"
             @click="getMore(scope.$index, scope.row)"
           >查看</el-button>
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.$index, scope.row)"
-          >通过</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-          >驳回</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -109,8 +91,8 @@
           <el-col :span="21"><el-input v-model="form.note" disabled="true" type="textarea" /></el-col>
         </el-row>
         <el-row style="margin-top: 20px; text-align: right; padding-right: 40px">
-          <el-button type="primary" @click="onSubmit">通过</el-button>
-          <el-button type="warning" @click="onSubmit">驳回</el-button>
+          <el-button type="primary" @click="pass">通过</el-button>
+          <el-button type="warning" @click="fail">驳回</el-button>
           <el-button @click="cancel">关闭</el-button>
         </el-row>
       </el-form>
@@ -119,8 +101,6 @@
 </template>
 
 <script>
-
-import qs from 'qs'
 
 export default {
   data() {
@@ -145,72 +125,34 @@ export default {
       dialogFormVisible: false
     }
   },
-  created() {
-    // axios.post('/uh/findByAudited', {
-    //   audited: 'unaudited'
-    // })
-    // const data = { audited: '待审核' }
-    // // data 提交请求参数
-    // this.$axios.post('/uh/findByAudited', data
-    // ).then(function(response) { // 采用post提交数据
-    //   console.log(response.data)
-    // }).catch(function(error) {
-    //   console.info(error)
-    // })
-
-    // this.$axios
-    //   .post('/uh/findByAudited/audited=unaudited'
-    //   ).then(resp => {
-    //     if (resp && resp.status === 200) {
-    //       this.tableData = resp.data
-    //     }
-    //   })
-
-    // const _this = this
-    // this.$axios
-    //   .post('/uh/findByAudited', { audited: 'unaudited' }).then(resp => {
-    //     if (resp && resp.status === 200) {
-    //       _this.tableData = resp.data
-    //     }
-    //   })
-
-    const data = qs.stringify({
-
-      audited: 'unaudited'
-
-    })
-
-    const _this = this
-    this.$axios({
-      method: 'post',
-      url: '/uh/findByAudited',
-      data: data
-    }).then(resp => {
-      console.log(resp.data)
-      if (resp && resp.status === 200) {
-        _this.tableData = resp.data
-      }
-    })
-
-    // axios.get('/findByAudited', { // params参数必写 , 如果没有参数传{}也可以
-    //   params: {
-    //     audited: 'unaudited'
-    //   }
-    // }).then(function(res) {
-    //   console.log(res)
-    // })
-    //   .catch(function(err) {
-    //     console.log(err)
-    //   })
-
-    // this.$ajax('http://localhost:8080/urgent_help/findAll').then(res => {
-    //   this.tableData = res.data
-    //   console.log(res.data)
-    // }).catch(function(error) {
-    //   console.log(error)
-    // })
+  mounted: function() {
+    this.loadUH()
   },
+
   methods: {
+    loadUH() {
+      const _this = this
+      this.$axios.post('/uh/unaudited', {
+        id: '',
+        uid: '',
+        kind: '',
+        time: '',
+        audited: 'unaudited',
+        level: '',
+        completed: '',
+        title: '',
+        province: '',
+        city: '',
+        county: '',
+        address: '',
+        detail: '',
+        note: ''
+      }).then(resp => {
+        if (resp && resp.status === 200) {
+          _this.tableData = resp.data
+        }
+      })
+    },
     tagType(lvl) {
       if (lvl === '紧急') {
         return 'danger'
@@ -238,6 +180,70 @@ export default {
       this.form.address = row['address']
       this.form.detail = row['detail']
       this.form.note = row['note']
+    },
+    pass() {
+      const _this = this
+      this.$confirm('是否确认【通过】该内容？', '提示', {
+        confirmButtonText: '确认通过',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$axios.post('/uh/audited', {
+          id: _this.form.id,
+          uid: '',
+          kind: '',
+          time: '',
+          audited: 'passed',
+          level: '',
+          completed: '',
+          title: '',
+          province: '',
+          city: '',
+          county: '',
+          address: '',
+          detail: '',
+          note: ''
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.$message({ type: 'success', message: '该内容已成功【通过】!' })
+            _this.loadUH()
+          }
+        }).catch(() => {
+          this.$message({ type: 'info', message: '已取消操作！' })
+        })
+      })
+    },
+    fail() {
+      const _this = this
+      this.$confirm('是否确认【驳回】该内容？', '提示', {
+        confirmButtonText: '确认驳回',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        _this.$axios.post('/uh/audited', {
+          id: _this.form.id,
+          uid: '',
+          kind: '',
+          time: '',
+          audited: 'failed',
+          level: '',
+          completed: '',
+          title: '',
+          province: '',
+          city: '',
+          county: '',
+          address: '',
+          detail: '',
+          note: ''
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            _this.$message({ type: 'success', message: '该内容已成功【驳回】!' })
+            _this.loadUH()
+          }
+        }).catch(() => {
+          this.$message({ type: 'info', message: '已取消操作！' })
+        })
+      })
     },
     cancel() {
       this.dialogFormVisible = false

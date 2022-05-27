@@ -1,6 +1,6 @@
 package com.example.spring.service;
 
-import com.example.spring.bean.VL;
+import com.example.spring.pojo.VL;
 import com.example.spring.dao.VLDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
