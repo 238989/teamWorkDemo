@@ -19,12 +19,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CommueOfLove">
-        <activity android:name=".Mine.UploadRecordActivity"></activity>
+        <activity android:name=".testActivity.TestMySqlActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Mine.UploadRecordActivity" />
         <activity android:name=".emergency.UploadUrgentActivity" />
         <activity android:name=".Mine.ContactAdministratorActivity" />
         <activity android:name=".Mine.ConfigPersonalActivity" />
-        <activity android:name=".testActivity.TestActivity">
-        </activity>
+        <activity android:name=".testActivity.TestActivity"></activity>
         <activity android:name=".RegisterAndLogin.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
