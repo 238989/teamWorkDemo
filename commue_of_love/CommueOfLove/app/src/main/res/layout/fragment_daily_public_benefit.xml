@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DailyPublicBenfit.DailyPublicBenefitFragment">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/icon_location" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="成都"
+            android:textSize="15sp" />
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_searchview"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@null"
+            android:queryHint=""
+            />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPage2"
+        app:layout_constraintBottom_toBottomOf="@id/tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/volunteer_img"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/img_voluteer" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <!--标题-->
+        <TextView
+            android:id="@+id/volunteer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:padding="1dp"
+            android:text="爱心志愿者招募"
+            android:textColor="#2c2c2c"
+            android:textSize="16sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <!--志愿类型-->
+            <TextView
+                android:id="@+id/volunteer_kind"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/background_label_1"
+                android:gravity="center_horizontal"
+                android:padding="2dp"
+                android:text="短期"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <!--是否结束-->
+            <TextView
+                android:id="@+id/volunteer_available"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_label_1"
+                android:gravity="center_horizontal"
+                android:padding="2dp"
+                android:text="未结束"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+            <!--地区-->
+            <TextView
+                android:id="@+id/volunteer_region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="10dp"
+                android:text="成都"
+                android:textColor="#696969"
+                android:textSize="12sp" />
+            <!--称呼-->
+            <TextView
+                android:id="@+id/volunteer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="10dp"
+                android:text="善意志愿组织"
+                android:textColor="#696969"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/volunteer_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:paddingRight="10dp"
+            android:text="关爱空巢老人，陪伴更温暖......"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

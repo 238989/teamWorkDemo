@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/background_shape_record"
+    android:orientation="vertical">
+
+    <!--标题-->
+    <TextView
+        android:id="@+id/record_urgent_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="left"
+        android:padding="1dp"
+        android:textSize="16sp"
+        android:layout_weight="1"
+        android:textColor="#2c2c2c"
+        android:text="疫情隔离急需生活物资" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+        <!--级别-->
+        <TextView
+            android:id="@+id/record_urgent_level"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_label_1"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="一级" />
+        <!--类型-->
+        <TextView
+            android:id="@+id/record_urgent_class"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/background_label_1"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="物资" />
+        <!--是否解决-->
+        <TextView
+            android:id="@+id/record_urgent_available"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/background_label_1"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="未解决" />
+<!--上传时间-->
+        <TextView
+            android:id="@+id/record_urgent_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:paddingRight="3dp"
+            android:gravity="right"
+            android:textSize="12sp"
+            android:text="2022-05-01 12:00"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+        <!--地区-->
+        <TextView
+            android:id="@+id/record_urgent_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="3dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="#696969"
+            android:text="成都" />
+        <!--称呼-->
+        <TextView
+            android:id="@+id/record_urgent_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="#696969"
+            android:text="张女士" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/record_urgent_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="10dp"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:text="由于已经隔离了有3个月，所以物资缺乏，目前需要......" />
+
+
+</LinearLayout>

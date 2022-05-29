@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.commueoflove"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
+    implementation 'com.github.xiaohaibin:XBanner:1.8.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+
+    //选择器的基础窗体
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:Common:4.0.1'
+    //滚轮选择器的滚轮控件
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:WheelView:4.0.1'
+    //省市区地址选择器
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:AddressPicker:4.0.1'
+    //悬浮按钮
+    implementation 'com.google.android.material:material:1.1.0'
+
+    compile 'com.alibaba:fastjson:1.1.54.android'
+    compile 'com.contrarywind:Android-PickerView:4.1.6'
+}

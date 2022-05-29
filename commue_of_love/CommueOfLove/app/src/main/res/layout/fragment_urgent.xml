@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".emergency.UrgentFragment">
+
+    <!--添加发布-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_urgent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="480dp"
+        android:layout_gravity="right"
+        android:backgroundTint="#FFFFFF"
+        android:scaleType="center"
+        android:src="@drawable/add_pict"
+        app:borderWidth="0dp"
+        app:elevation="5dp"
+        app:rippleColor="@color/colorAccent"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fadeScrollbars="false"
+        android:layout_marginTop="-450dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+     <!--轮播图-->
+            <com.stx.xhb.xbanner.XBanner
+                android:id="@+id/xbanner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:AutoPlayTime="3000"
+                app:isClipChildrenMode="true"
+                app:isShowIndicatorOnlyOne="true"
+                app:pageChangeDuration="800"
+                app:pointsContainerBackground="#00000000"
+                app:pointsPosition="CENTER"
+                app:pointsVisibility="true"
+                app:tipTextSize="12sp"
+                tools:ignore="MissingConstraints">
+            </com.stx.xhb.xbanner.XBanner>
+
+
+     <!--求助信息表-->
+            <ListView
+                android:id="@+id/urgent_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
+                android:scrollbars="none"
+                android:layout_marginTop="10dp"/>
+
+            <!--添加发布-->
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

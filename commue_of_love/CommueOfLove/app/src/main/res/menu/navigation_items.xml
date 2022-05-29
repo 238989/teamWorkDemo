@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/emergency"
+        android:icon="@drawable/emergency"
+        android:title="紧急救助"/>
+    <item
+        android:id="@+id/benefit"
+        android:icon="@drawable/benefit"
+        android:title="日常公益"/>
+    <item
+        android:id="@+id/mine"
+        android:icon="@drawable/mine"
+        android:title="我的"/>
+
+</menu>
