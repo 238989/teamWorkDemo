@@ -2,15 +2,8 @@
 name: AirDrop Demo Actions
 
 # 在满足以下条件触发这个workflow
-on:
-  push:
-    # 在指定的远程分支上，发生推送
-    branches:
-      - master
-    # 指定文件发生修改
-    paths:
-      - './airdrop/Android/build.gradle'
-     
+on: [push]
+ 
       
 # workflow的所有作业job
 jobs:
