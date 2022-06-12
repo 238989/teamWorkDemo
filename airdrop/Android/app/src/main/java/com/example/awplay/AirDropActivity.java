@@ -147,7 +147,7 @@ public class AirDropActivity extends AppCompatActivity implements View.OnClickLi
         }
         if (cursor.moveToFirst()) {
             // 多媒体文件，从数据库中获取文件的真实路径
-            filePath = cursor.getString(cursor.getColumnIndex("_data"));
+            filePath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
             chose.setText(filePath);
             Log.i(TAG, "onActivityResult: 获取到的文件名为："+filePath);
         }
