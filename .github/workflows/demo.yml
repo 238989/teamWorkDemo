@@ -41,7 +41,7 @@ jobs:
           java-version: 1.8
       # 步骤3，执行shell命令
       - name: Unit tests
-        run: bash ./gradlew test --stacktrace
+        run: bash ./airdrop/Android/gradlew test --stacktrace
 
   apk:
     name: Generate APK
@@ -54,7 +54,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: bash ./airdrop/Android/gradlew assembleDebug --stacktrace
       # 利用upload-artifact实现build结果的保存（可以在Actions的控制台下载压缩文件）
       - name: Upload APK
         uses: actions/upload-artifact@v2
