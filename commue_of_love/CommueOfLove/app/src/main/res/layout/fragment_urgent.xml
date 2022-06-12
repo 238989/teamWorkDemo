@@ -53,6 +53,67 @@
                 tools:ignore="MissingConstraints">
             </com.stx.xhb.xbanner.XBanner>
 
+            <!--筛选-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/border_selection_shape"
+                    android:text="全部" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/border_selection_shape"
+                    android:text="等级" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/border_selection_shape"
+                    android:text="状态" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/border_selection_shape"
+                    android:text="地区" />
+            </LinearLayout>
+
 
      <!--求助信息表-->
             <ListView
