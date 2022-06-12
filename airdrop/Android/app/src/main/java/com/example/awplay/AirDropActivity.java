@@ -14,24 +14,30 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AirDropActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "AirDropActivity";
-    private TextView chose,showMes;
+    private TextView chose,showMes,showReMes;
     Button sendMes;
     String filePath,mes;
     Uri uri;
@@ -44,6 +50,35 @@ public class AirDropActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_air_drop);
         showMes = findViewById(R.id.show_mes);
         sendMes = findViewById(R.id.send_mes);
+        showReMes = findViewById(R.id.show_receive_mes);
+
+        //获取PC发送的消息,并显示
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    ServerSocket ss = new ServerSocket(9823);
+                    // 采用循环不断的接收来自客户端的请求
+                    while (true) {
+//                Socket socket = new Socket("10.63.95.249", 30000);
+                        Socket s = ss.accept();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                        String content = br.readLine();
+                        System.out.println("收到服务器消息" + content);
+                        br.close();
+                        showReMes.setText(content);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
+//        ReceiveMessage mesThread = new ReceiveMessage();
+//        Thread th = new Thread(mesThread);
+//        th.start();
+//        String content = mesThread.getReceiveMes();
+
 
         //选择文件
         chose = findViewById(R.id.btn_choose_file);
@@ -136,20 +171,21 @@ public class AirDropActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
         uri = data.getData(); // 获取用户选择文件的URI
-        Log.i(TAG, "onActivityResult: 获取到的文件名为："+uri);
+        Log.i(TAG, "onActivityResult: uri获取到的文件名为："+uri);
         // 通过ContentProvider查询文件路径
         ContentResolver resolver = this.getContentResolver();
         Cursor cursor = resolver.query(uri, null, null, null, null);
         if (cursor == null) {
             // 未查询到，说明为普通文件，可直接通过URI获取文件路径
             filePath = uri.getPath();
+            Log.i(TAG, "onActivityResult: cursor为空时："+uri);
             return;
         }
         if (cursor.moveToFirst()) {
             // 多媒体文件，从数据库中获取文件的真实路径
             filePath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
             chose.setText(filePath);
-            Log.i(TAG, "onActivityResult: 获取到的文件名为："+filePath);
+            Log.i(TAG, "onActivityResult: test："+filePath);
         }
         cursor.close();
     }

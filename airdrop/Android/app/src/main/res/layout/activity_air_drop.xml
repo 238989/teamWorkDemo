@@ -90,5 +90,28 @@
         android:textSize="14sp"
         />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="接受到的消息：" />
+
+    <TextView
+        android:id="@+id/show_receive_mes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:textSize="14sp"
+        />
 
 </LinearLayout>
